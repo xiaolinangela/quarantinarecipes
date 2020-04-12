@@ -6,7 +6,7 @@ from .serializers import RecipeSerializer
 
 
 class RecipeViewSet(viewsets.ModelViewSet):
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.all().order_by('-created_at')
     permissions_classes = [
         permissions.AllowAny
     ]

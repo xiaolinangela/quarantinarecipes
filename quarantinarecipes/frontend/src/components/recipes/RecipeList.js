@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getRecipes } from "../../actions/recipes";
 import { Card, Image } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 class RecipeList extends Component {
   static propTypes = {
@@ -16,9 +17,13 @@ class RecipeList extends Component {
     return this.props.recipes.map((recipe) => {
       return (
         <Card key={recipe.id} link>
-          <Image src={recipe.image} height="200" width="290" />
+          <Link to={`/recipes/detail/${recipe.id}`}>
+            <Image src={recipe.image} height="200" width="290" />
+          </Link>
           <Card.Content>
-            <Card.Header>{recipe.name}</Card.Header>
+            <Link to={`/recipes/detail/${recipe.id}`}>
+              <Card.Header>{recipe.name}</Card.Header>
+            </Link>
             <Card.Description>
               {" "}
               Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -29,7 +34,6 @@ class RecipeList extends Component {
     });
   }
   render() {
-    console.log(this.props);
     return (
       <div>
         <h2>My Recipes</h2>
@@ -40,7 +44,7 @@ class RecipeList extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  recipes: state.recipes.recipes,
+  recipes: Object.values(state.recipes),
 });
 
 export default connect(mapStateToProps, { getRecipes })(RecipeList);

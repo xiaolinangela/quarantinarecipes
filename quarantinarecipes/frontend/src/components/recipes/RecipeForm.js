@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
 
 class RecipeForm extends Component {
   renderError({ error, touched }) {
@@ -23,8 +23,9 @@ class RecipeForm extends Component {
   };
 
   onSubmit = (formValues) => {
-    console.log(formValues);
+    const { reset } = this.props;
     this.props.onSubmit(formValues);
+    reset();
   };
 
   renderFileInput = ({ input, dataAllowedFileExtensions, label }) => {
