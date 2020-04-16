@@ -10,8 +10,8 @@ class RecipeEdit extends Component {
     this.props.getRecipe(id);
   }
 
-  onSubmit = (recipeId, formValues) => {
-    this.props.editRecipe(recipeId, formValues);
+  onSubmit = (formValues) => {
+    this.props.editRecipe(this.props.match.params.id, formValues);
   };
   render() {
     if (!this.props.recipe) {
