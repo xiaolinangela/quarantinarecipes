@@ -6,6 +6,8 @@ import RecipeCreate from "./recipes/RecipeCreate";
 import RecipeDetail from "./recipes/RecipeDetail";
 import RecipeEdit from "./recipes/RecipeEdit";
 import RecipeDelete from "./recipes/RecipeDelete";
+import Register from "./accounts/Register";
+import Login from "./accounts/Login";
 import history from "../history";
 
 import { Provider } from "react-redux";
@@ -33,6 +35,8 @@ class App extends Component {
                   path="/recipes/delete/:id"
                   component={RecipeDelete}
                 />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
               </Switch>
             </div>
           </Fragment>

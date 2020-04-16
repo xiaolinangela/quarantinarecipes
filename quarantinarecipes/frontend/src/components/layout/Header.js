@@ -23,6 +23,12 @@ class Header extends Component {
           <Link to="/recipes/new" className="item">
             Create Recipe
           </Link>
+          <Link to="/register" className="item">
+            Register
+          </Link>
+          <Link to="/login" className="item">
+            Login
+          </Link>
         </div>
       </div>
     );
