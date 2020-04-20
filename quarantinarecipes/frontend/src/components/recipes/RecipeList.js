@@ -45,6 +45,7 @@ class RecipeList extends Component {
 
 const mapStateToProps = (state) => ({
   recipes: Object.values(state.recipes),
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 export default connect(mapStateToProps, { getRecipes })(RecipeList);

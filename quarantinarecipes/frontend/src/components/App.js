@@ -8,6 +8,7 @@ import RecipeEdit from "./recipes/RecipeEdit";
 import RecipeDelete from "./recipes/RecipeDelete";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
+import PrivateRoute from "./common/PrivateRoute";
 import history from "../history";
 
 import { Provider } from "react-redux";
@@ -22,15 +23,23 @@ class App extends Component {
             <div className="ui container">
               <Header />
               <Switch>
-                <Route exact path="/" component={RecipeList} />
-                <Route exact path="/recipes/new" component={RecipeCreate} />
-                <Route
+                <PrivateRoute exact path="/" component={RecipeList} />
+                <PrivateRoute
+                  exact
+                  path="/recipes/new"
+                  component={RecipeCreate}
+                />
+                <PrivateRoute
                   exact
                   path="/recipes/detail/:id"
                   component={RecipeDetail}
                 />
-                <Route exact path="/recipes/edit/:id" component={RecipeEdit} />
-                <Route
+                <PrivateRoute
+                  exact
+                  path="/recipes/edit/:id"
+                  component={RecipeEdit}
+                />
+                <PrivateRoute
                   exact
                   path="/recipes/delete/:id"
                   component={RecipeDelete}
