@@ -7,7 +7,7 @@ from .serializers import RecipeSerializer
 
 class RecipeViewSet(viewsets.ModelViewSet):
 
-    permissions_classes = [
+    permission_classes = [
         permissions.IsAuthenticated
     ]
     serializer_class = RecipeSerializer

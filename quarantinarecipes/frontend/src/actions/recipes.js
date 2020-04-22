@@ -8,34 +8,13 @@ import {
 import axios from "axios";
 import regeneratorRuntime from "regenerator-runtime";
 import history from "../history";
-
-// export const getRecipes = () => (dispatch, getState) => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   };
-//   axios
-//     .get("http://127.0.0.1:8000/api/recipes/", config)
-//     .then((response) => {
-//       dispatch({
-//         type: GET_RECIPES,
-//         payload: response.data,
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
+import { tokenConfig } from "./auth";
 
 export const getRecipes = () => async (dispatch, getState) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
   try {
     const response = await axios.get(
       "http://127.0.0.1:8000/api/recipes/",
-      config
+      tokenConfig(getState)
     );
     dispatch({
       type: GET_RECIPES,
@@ -45,23 +24,6 @@ export const getRecipes = () => async (dispatch, getState) => {
     console.log(error);
   }
 };
-
-// export const getRecipe = (id) => (dispatch) => {
-//   const config = {
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//   };
-//   axios
-//     .get(`http://127.0.0.1:8000/api/recipes/${id}/`, config)
-//     .then((response) => {
-//       dispatch({
-//         type: GET_RECIPE,
-//         payload: response.data,
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
 
 export const getRecipe = (id) => async (dispatch) => {
   const config = {
@@ -83,39 +45,24 @@ export const getRecipe = (id) => async (dispatch) => {
   }
 };
 
-// export const editRecipe = (id, formValues) => (dispatch) => {
-//   const { name, ingredients, instructions, image } = formValues;
-//   console.log(ingredients);
-//   const formData = new FormData();
-//   formData.append("name", name);
-//   formData.append("ingredients", ingredients);
-//   formData.append("instructions", instructions);
-//   formData.append("image", image);
-
-//   axios
-//     .patch(`http://127.0.0.1:8000/api/recipes/${id}/`, formData)
-//     .then((response) => {
-//       dispatch({
-//         type: EDIT_RECIPE,
-//         payload: response.data,
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
-
-export const editRecipe = (id, formValues) => (dispatch) => {
+export const editRecipe = (id, formValues) => (dispatch, getState) => {
   const { name, ingredients, instructions, image } = formValues;
-  console.log(ingredients);
   const formData = new FormData();
   formData.append("name", name);
   formData.append("ingredients", ingredients);
   formData.append("instructions", instructions);
   formData.append("image", image);
-
+  const token = getState().auth.token;
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  };
   try {
     const response = axios.patch(
       `http://127.0.0.1:8000/api/recipes/${id}/`,
-      formData
+      formData,
+      config
     );
     dispatch({
       type: EDIT_RECIPE,
@@ -127,50 +74,40 @@ export const editRecipe = (id, formValues) => (dispatch) => {
   history.push("/");
 };
 
-// export const createRecipe = ({ name, ingredients, instructions, image }) => (
-//   dispatch
-// ) => {
-//   const formData = new FormData();
-//   formData.append("name", name);
-//   formData.append("ingredients", ingredients);
-//   formData.append("instructions", instructions);
-//   formData.append("image", image);
-
-//   axios
-//     .post("http://127.0.0.1:8000/api/recipes/", formData)
-//     .then((response) => {
-//       dispatch({ type: CREATE_RECIPE, payload: response.data });
-//     })
-//     .catch((err) => console.log(err));
-// };
-
 export const createRecipe = ({
   name,
   ingredients,
   instructions,
   image,
-}) => async (dispatch) => {
+}) => async (dispatch, getState) => {
   const formData = new FormData();
   formData.append("name", name);
   formData.append("ingredients", ingredients);
   formData.append("instructions", instructions);
   formData.append("image", image);
-
+  const token = getState().auth.token;
+  const config = {
+    headers: {
+      Authorization: `Token ${token}`,
+    },
+  };
   try {
-    const response = axios.post("http://127.0.0.1:8000/api/recipes/", formData);
+    const response = axios.post(
+      "http://127.0.0.1:8000/api/recipes/",
+      formData,
+      config
+    );
     dispatch({ type: CREATE_RECIPE, payload: response.data });
   } catch (error) {
     console.log(error);
   }
 };
 
-export const deleteRecipe = (id) => async (dispatch) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  await axios.delete(`http://127.0.0.1:8000/api/recipes/${id}/`, config);
+export const deleteRecipe = (id) => async (dispatch, getState) => {
+  await axios.delete(
+    `http://127.0.0.1:8000/api/recipes/${id}/`,
+    tokenConfig(getState)
+  );
   dispatch({ type: DELETE_RECIPE, payload: id });
   history.push("/");
 };
