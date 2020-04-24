@@ -9,6 +9,7 @@ import axios from "axios";
 import regeneratorRuntime from "regenerator-runtime";
 import history from "../history";
 import { tokenConfig } from "./auth";
+import { createMessage } from "./messages";
 
 export const getRecipes = () => async (dispatch, getState) => {
   try {
@@ -97,10 +98,12 @@ export const createRecipe = ({
       formData,
       config
     );
+    dispatch(createMessage({ addRecipe: "Recipe Added" }));
     dispatch({ type: CREATE_RECIPE, payload: response.data });
   } catch (error) {
     console.log(error);
   }
+  history.push("/");
 };
 
 export const deleteRecipe = (id) => async (dispatch, getState) => {
