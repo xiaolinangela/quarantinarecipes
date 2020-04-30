@@ -14,17 +14,11 @@ class Header extends Component {
         </Link>
 
         <div className="right menu">
-          <div className="item">
-            <div className="ui icon input">
-              <input type="text" placeholder="search..."></input>
-              <i className="search link icon"></i>
-            </div>
-          </div>
           <Link to="/recipes/new" className="item">
             Create Recipe
           </Link>
           <Link to="/register" className="item">
-            Register
+            Hello
           </Link>
           <Link to="/login" className="item">
             Login

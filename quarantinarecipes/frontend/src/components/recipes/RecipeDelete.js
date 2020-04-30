@@ -36,7 +36,6 @@ class RecipeDelete extends Component {
     return `Are you sure you want to delete the stream with title: ${this.props.recipe.name}`;
   }
   render() {
-    console.log(this.props);
     return (
       <Modal
         title="Delete Recipe"

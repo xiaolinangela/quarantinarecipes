@@ -103,7 +103,6 @@ export const createRecipe = ({
   } catch (error) {
     console.log(error);
   }
-  history.push("/");
 };
 
 export const deleteRecipe = (id) => async (dispatch, getState) => {
@@ -111,6 +110,8 @@ export const deleteRecipe = (id) => async (dispatch, getState) => {
     `http://127.0.0.1:8000/api/recipes/${id}/`,
     tokenConfig(getState)
   );
+
   dispatch({ type: DELETE_RECIPE, payload: id });
-  history.push("/");
+  dispatch(createMessage({ deleteRecipe: "Recipe Deleted" }));
+  //history.push("/");
 };

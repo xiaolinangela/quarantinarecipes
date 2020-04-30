@@ -1,5 +1,12 @@
 import axios from "axios";
-import { REGISTER_SUCCESS, LOGIN_SUCCESS } from "./types";
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  AUTH_ERROR,
+} from "./types";
+import { returnErrors } from "./messages";
 import history from "../history";
 
 export const register = (formValues) => async (dispatch) => {
@@ -43,9 +50,26 @@ export const login = ({ username, password }) => async (dispatch) => {
       payload: response.data,
     });
   } catch (error) {
-    console.log(error);
+    dispatch(returnErrors(error.response.data, error.response.status));
+    dispatch({
+      type: LOGIN_FAIL,
+    });
   }
   history.push("/");
+};
+
+export const logout = () => (dispatch, getState) => {
+  axios
+    .post("http://127.0.0.1:8000/api/auth/logout", null, tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: LOGOUT_SUCCESS,
+      });
+    })
+    .catch((err) => {
+      console.log(err.response.data);
+      console.log(err.response.status);
+    });
 };
 
 // setup tokenconfig
