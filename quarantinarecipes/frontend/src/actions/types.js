@@ -10,3 +10,4 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const GET_ERRORS = "GET_ERRORS";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";

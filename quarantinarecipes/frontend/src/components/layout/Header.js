@@ -1,9 +1,33 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
 
 class Header extends Component {
-  state = {};
   render() {
+    const { isAuthenticated } = this.props.auth;
+    console.log(isAuthenticated);
+    const authLinks = (
+      <div className="right menu">
+        <Link to="/recipes/new" className="item">
+          Create Recipe
+        </Link>
+        <button onClick={this.props.logout} className="ui teal button">
+          Logout
+        </button>
+      </div>
+    );
+    const guestLinks = (
+      <div className="right menu">
+        <Link to="/register" className="item">
+          Register
+        </Link>
+        <Link to="/login" className="item">
+          Login
+        </Link>
+      </div>
+    );
+
     return (
       <div className="ui secondary pointing menu">
         {/* <Link to="/" clasName="item">
@@ -12,21 +36,14 @@ class Header extends Component {
         <Link to="/" className="item" style={{ color: "#32CD32" }}>
           <h3>Quarantina Recipes</h3>
         </Link>
-
-        <div className="right menu">
-          <Link to="/recipes/new" className="item">
-            Create Recipe
-          </Link>
-          <Link to="/register" className="item">
-            Hello
-          </Link>
-          <Link to="/login" className="item">
-            Login
-          </Link>
-        </div>
+        {isAuthenticated ? authLinks : guestLinks}
       </div>
     );
   }
 }
 
-export default Header;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, { logout })(Header);

@@ -5,6 +5,7 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   AUTH_ERROR,
+  LOGOUT_SUCCESS,
 } from "./types";
 import { returnErrors } from "./messages";
 import history from "../history";
@@ -67,8 +68,7 @@ export const logout = () => (dispatch, getState) => {
       });
     })
     .catch((err) => {
-      console.log(err.response.data);
-      console.log(err.response.status);
+      dispatch(returnErrors(err.response.data, err.response.status));
     });
 };
 
