@@ -22,6 +22,17 @@ class RecipeForm extends Component {
     );
   };
 
+  renderTextArea = ({ input, label, meta }) => {
+    const className = `field ${meta.error && meta.touched ? "error" : ""}`;
+    return (
+      <div className={className}>
+        <label>{label}</label>
+        <textarea {...input} autoComplete="off" />
+        {this.renderError(meta)}
+      </div>
+    );
+  };
+
   onSubmit = (formValues) => {
     const { reset } = this.props;
     this.props.onSubmit(formValues);
@@ -55,12 +66,13 @@ class RecipeForm extends Component {
           <Field name="name" component={this.renderInput} label="Recipe Name" />
           <Field
             name="ingredients"
-            component={this.renderInput}
+            component={this.renderTextArea}
             label="Ingredients"
           />
           <Field
             name="instructions"
-            component={this.renderInput}
+            component={this.renderTextArea}
+            type="textarea"
             label="Instructions"
           />
           <Field
