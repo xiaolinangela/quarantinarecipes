@@ -5,10 +5,13 @@ import { logout } from "../../actions/auth";
 
 class Header extends Component {
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
     console.log(isAuthenticated);
     const authLinks = (
       <div className="right menu">
+        <span className="ui item">
+          <strong>{user ? `Welcome ${user.username}` : ""}</strong>
+        </span>
         <Link to="/recipes/new" className="item">
           Create Recipe
         </Link>

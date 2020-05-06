@@ -32,7 +32,6 @@ class RecipeForm extends Component {
     const onInputChange = (e) => {
       e.preventDefault();
       const file = e.target.files[0];
-      console.log(file);
       input.onChange(file);
     };
     return (

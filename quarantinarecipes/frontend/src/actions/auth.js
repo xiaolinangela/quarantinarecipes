@@ -6,9 +6,29 @@ import {
   LOGIN_FAIL,
   AUTH_ERROR,
   LOGOUT_SUCCESS,
+  USER_LOADING,
 } from "./types";
 import { returnErrors } from "./messages";
 import history from "../history";
+
+export const loadUser = () => (dispatch, getState) => {
+  dispatch({ type: USER_LOADING });
+
+  axios
+    .get("http://127.0.0.1:8000/api/auth/user", tokenConfig(getState))
+    .then((res) => {
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      dispatch({
+        type: AUTH_ERROR,
+      });
+    });
+};
 
 export const register = (formValues) => async (dispatch) => {
   const { username, password, email } = formValues;
@@ -31,6 +51,7 @@ export const register = (formValues) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+  history.push("/");
 };
 
 export const login = ({ username, password }) => async (dispatch) => {

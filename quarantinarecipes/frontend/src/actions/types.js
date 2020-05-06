@@ -11,3 +11,5 @@ export const CREATE_MESSAGE = "CREATE_MESSAGE";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const GET_ERRORS = "GET_ERRORS";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const USER_LOADED = "USER_LOADED";
+export const USER_LOADING = "USER_LOADING";
