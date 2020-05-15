@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from config import CONFIG_SECRET_KEY, DATABASE_PASSWORD, DATABASE_USER
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '&p&t#0%6q7)s999$ug7w$4j^g$&=zj9ru_=f5th^!@y08!22u)'
+SECRET_KEY = CONFIG_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'quarantinarecipes',
-        'USER': 'angela',
-        'PASSWORD': 'xiaolin1990',
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
         'HOST': 'localhost',
         'PORT': '',
     }
