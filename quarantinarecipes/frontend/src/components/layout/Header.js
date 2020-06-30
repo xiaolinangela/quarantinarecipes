@@ -37,7 +37,7 @@ class Header extends Component {
           <h3>Quarantina Recipes</h3>
         </Link> */}
         <Link to="/" className="item" style={{ color: "#32CD32" }}>
-          <h3>Quarantina Recipes</h3>
+          <h1>Quarantina Recipes</h1>
         </Link>
         {isAuthenticated ? authLinks : guestLinks}
       </div>

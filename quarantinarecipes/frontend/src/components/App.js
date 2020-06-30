@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import "./style/style.css";
 import { Router, Route, Switch } from "react-router-dom";
 import Header from "./layout/Header";
 import RecipeList from "./recipes/RecipeList";

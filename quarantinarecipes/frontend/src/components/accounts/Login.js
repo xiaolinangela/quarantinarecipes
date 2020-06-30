@@ -32,10 +32,10 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <h3>Login</h3>
+        <h2 className="text-center">Login</h2>
         <form
           onSubmit={this.props.handleSubmit(this.onSubmit)}
-          className="ui form error"
+          className="ui form error form-container"
         >
           <Field
             name="username"
@@ -56,6 +56,14 @@ class Login extends Component {
             Don't have an account? <Link to="/register">Register</Link>
           </p>
         </form>
+        <h2 className="text-center">
+          Start to share recipes with your friends today!
+        </h2>
+        <div className="login-img">
+          <img src="https://cdn.clipart.email/f671d4afc46fc3ad2b72b4b0601c2876_download-cooking-tools-png-clipart-free-transparent-png-images-_403-403.png" />
+          <img src="https://cdn.clipart.email/f671d4afc46fc3ad2b72b4b0601c2876_download-cooking-tools-png-clipart-free-transparent-png-images-_403-403.png" />
+          <img src="https://cdn.clipart.email/f671d4afc46fc3ad2b72b4b0601c2876_download-cooking-tools-png-clipart-free-transparent-png-images-_403-403.png" />
+        </div>
       </div>
     );
   }

@@ -1,0 +1,30 @@
+.form-container {
+  width: 500px;
+  margin: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.login-bg {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1483137140003-ae073b395549?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80")
+      no-repeat center center/cover;
+  height: 100vh;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.login-img {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: bottom;
+  align-items: bottom;
+  margin-top: 100px;
+}
+
+h1 h2 {
+  color: #21ba45;
+}
