@@ -14,7 +14,7 @@ import { createMessage } from "./messages";
 export const getRecipes = () => async (dispatch, getState) => {
   try {
     const response = await axios.get(
-      "http://127.0.0.1:8000/api/recipes/",
+      "localhost:8000/api/recipes/",
       tokenConfig(getState)
     );
     dispatch({
@@ -33,10 +33,7 @@ export const getRecipe = (id) => async (dispatch) => {
     },
   };
   try {
-    const response = await axios.get(
-      `http://127.0.0.1:8000/api/recipes/${id}/`,
-      config
-    );
+    const response = await axios.get(`localhost/api/recipes/${id}/`, config);
     dispatch({
       type: GET_RECIPE,
       payload: response.data,
@@ -61,7 +58,7 @@ export const editRecipe = (id, formValues) => (dispatch, getState) => {
   };
   try {
     const response = axios.patch(
-      `http://127.0.0.1:8000/api/recipes/${id}/`,
+      `localhost/api/recipes/${id}/`,
       formData,
       config
     );
@@ -94,7 +91,7 @@ export const createRecipe = ({
   };
   try {
     const response = axios.post(
-      "http://127.0.0.1:8000/api/recipes/",
+      "localhost:8000/api/recipes/",
       formData,
       config
     );
@@ -106,10 +103,7 @@ export const createRecipe = ({
 };
 
 export const deleteRecipe = (id) => async (dispatch, getState) => {
-  await axios.delete(
-    `http://127.0.0.1:8000/api/recipes/${id}/`,
-    tokenConfig(getState)
-  );
+  await axios.delete(`loclhost:8000/api/recipes/${id}/`, tokenConfig(getState));
 
   dispatch({ type: DELETE_RECIPE, payload: id });
   dispatch(createMessage({ deleteRecipe: "Recipe Deleted" }));
