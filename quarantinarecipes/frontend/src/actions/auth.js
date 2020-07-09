@@ -8,6 +8,7 @@ import {
   LOGOUT_SUCCESS,
   USER_LOADING,
 } from "./types";
+import { domain } from "./variables";
 import { returnErrors } from "./messages";
 import history from "../history";
 
@@ -15,7 +16,7 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axios
-    .get("localhost:8000/api/auth/user", tokenConfig(getState))
+    .get(`${domain}/api/auth/user`, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: USER_LOADED,
@@ -40,7 +41,7 @@ export const register = (formValues) => async (dispatch) => {
   const body = JSON.stringify({ username, password, email });
   try {
     const response = await axios.post(
-      "localhost:8000/api/auth/register",
+      `${domain}/api/auth/register"`,
       body,
       config
     );
@@ -62,11 +63,7 @@ export const login = ({ username, password }) => async (dispatch) => {
   };
   const body = JSON.stringify({ username, password });
   try {
-    const response = await axios.post(
-      "http://localhost:8000/api/auth/login",
-      body,
-      config
-    );
+    const response = await axios.post(`${domain}/api/auth/login`, body, config);
     dispatch({
       type: LOGIN_SUCCESS,
       payload: response.data,
@@ -82,7 +79,7 @@ export const login = ({ username, password }) => async (dispatch) => {
 
 export const logout = () => (dispatch, getState) => {
   axios
-    .post("localhost:8000/api/auth/logout", null, tokenConfig(getState))
+    .post(`${domain}/api/auth/logout`, null, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: LOGOUT_SUCCESS,
