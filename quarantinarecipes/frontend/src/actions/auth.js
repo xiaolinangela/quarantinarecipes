@@ -41,7 +41,7 @@ export const register = (formValues) => async (dispatch) => {
   const body = JSON.stringify({ username, password, email });
   try {
     const response = await axios.post(
-      `${domain}/api/auth/register"`,
+      `${domain}/api/auth/register`,
       body,
       config
     );
